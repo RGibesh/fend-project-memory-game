@@ -4,6 +4,18 @@
 
 const icons = ["fa fa-telegram", "fa fa-telegram", "fa fa-free-code-camp", "fa fa-free-code-camp", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
 
+// Select Cards from class deck
+
+const cards = document.querySelector(".deck");
+
+// Create the Cards dynamically
+for (let i = 0; i < icons.length; i++) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `<i class="${icons[i]}"></i>`;
+    cards.appendChild(card);
+}
+
 
 /*
  * Display the cards on the page
