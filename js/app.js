@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-const icons = ["fa fa-telegram", "fa fa-telegram", "fa fa-free-code-camp", "fa fa-free-code-camp", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"]
+const icons = ["fa fa-telegram", "fa fa-telegram", "fa fa-free-code-camp", "fa fa-free-code-camp", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
 
 
 /*
