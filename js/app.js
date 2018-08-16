@@ -48,45 +48,52 @@ function click(card) {
         // Comparing existing opened cards
         if (openedCards.length === 1) {
 
-            card.classList.add("open", "show");
+            card.classList.add("open", "show", "disable");
             openedCards.push(this);
 
-            if (this.innerHTML === openedCards[0].innerHTML) {
-
-                //Matched Cards
-                latestCard.classList.add("match");
-                lastCard.classList.add("match");
-
-                matchedCards.push(latestCard, lastCard);
-
-                //Reset openCards array
-                openedCards = [];
-
-                //Game over function
-                gameOver();
-            } else {
-
-                setTimeout(function() {
-                    latestCard.classList.remove("open", "show");
-                    lastCard.classList.remove("open", "show");
-                    //Reset openCards array
-                    openedCards = [];
-                }, 500);
-
-
-
-            }
+            compare(latestCard, lastCard);
 
         } else {
-            latestCard.classList.add("open", "show");
+            latestCard.classList.add("open", "show", "disable");
             openedCards.push(this);
 
         }
 
     });
-
 }
 
+/*
+ * Compare the cards function
+ */
+
+function compare(latestCard, lastCard) {
+    if (latestCard.innerHTML === lastCard.innerHTML) {
+
+        //Matched Cards
+        latestCard.classList.add("match");
+        lastCard.classList.add("match");
+
+        matchedCards.push(latestCard, lastCard);
+
+        //Reset openCards array
+        openedCards = [];
+
+        //Game over function
+        gameOver();
+    } else {
+
+        setTimeout(function() {
+            latestCard.classList.remove("open", "show");
+            lastCard.classList.remove("open", "show");
+            //Reset openCards array
+            openedCards = [];
+        }, 500);
+    }
+}
+
+/*
+ * Game over function
+ */
 
 function gameOver() {
 
