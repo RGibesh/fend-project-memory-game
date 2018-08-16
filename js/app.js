@@ -2,11 +2,13 @@
  * Create a list that holds all of your cards
  */
 
-const icons = ["fa fa-telegram", "fa fa-telegram", "fa fa-free-code-camp", "fa fa-free-code-camp", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
+const icons = ["fa fa-bolt", "fa fa-bolt", "fa fa-rocket", "fa fa-rocket", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
 
 // Select Cards from class deck
-
 const cards = document.querySelector(".deck");
+
+//Empty array to store openedcards
+let openedCards = [];
 
 // Create the Cards dynamically
 for (let i = 0; i < icons.length; i++) {
@@ -14,6 +16,23 @@ for (let i = 0; i < icons.length; i++) {
     card.classList.add("card");
     card.innerHTML = `<i class="${icons[i]}"></i>`;
     cards.appendChild(card);
+
+    // Add click event on card
+    card.addEventListener("click", function() {
+
+        // Comparing existing opened cards
+        if (openedCards.length === 1) {
+
+        } else {
+
+        }
+
+
+        card.classList.add("open", "show");
+        openedCards.push(this);
+
+
+    });
 }
 
 
