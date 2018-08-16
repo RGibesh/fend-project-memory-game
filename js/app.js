@@ -13,13 +13,32 @@ let openedCards = [];
 //Empty array to store matchedCards
 let matchedCards = [];
 
-// Create the Cards dynamically
-for (let i = 0; i < icons.length; i++) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = `<i class="${icons[i]}"></i>`;
-    cards.appendChild(card);
+/*
+ * Initialize the game
+ */
 
+function startGame() {
+    // Create the Cards dynamically
+    for (let i = 0; i < icons.length; i++) {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `<i class="${icons[i]}"></i>`;
+        cards.appendChild(card);
+
+        // Add click Event to each card
+        click(card);
+
+
+    }
+
+}
+
+
+/*
+ * Click Crad Event function
+ */
+
+function click(card) {
     // Add click event on card
     card.addEventListener("click", function() {
 
@@ -46,11 +65,16 @@ for (let i = 0; i < icons.length; i++) {
                 //Game over function
                 gameOver();
             } else {
-                latestCard.classList.remove("open", "show");
-                lastCard.classList.remove("open", "show");
 
-                //Reset openCards array
-                openedCards = [];
+                setTimeout(function() {
+                    latestCard.classList.remove("open", "show");
+                    lastCard.classList.remove("open", "show");
+                    //Reset openCards array
+                    openedCards = [];
+                }, 500);
+
+
+
             }
 
         } else {
@@ -60,7 +84,9 @@ for (let i = 0; i < icons.length; i++) {
         }
 
     });
+
 }
+
 
 function gameOver() {
 
@@ -68,8 +94,11 @@ function gameOver() {
         alert("GAME OVER");
     }
 
-
 }
+
+// Start the game for the first time
+
+startGame();
 
 /*
  * Display the cards on the page
