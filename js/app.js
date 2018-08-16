@@ -83,8 +83,8 @@ function compare(latestCard, lastCard) {
     } else {
 
         setTimeout(function() {
-            latestCard.classList.remove("open", "show");
-            lastCard.classList.remove("open", "show");
+            latestCard.classList.remove("open", "show", "disable");
+            lastCard.classList.remove("open", "show", "disable");
             //Reset openCards array
             openedCards = [];
         }, 500);
@@ -102,6 +102,24 @@ function gameOver() {
     }
 
 }
+
+/*
+ * Restart the game
+ */
+
+const reset = document.querySelector(".restart");
+reset.addEventListener("click", function() {
+
+    // Remove all cards
+    cards.innerHTML = "";
+
+    // Call 'startGame' function to start a new game
+    startGame();
+
+    // Reset matched cards
+    matchedCards = [];
+
+});
 
 // Start the game for the first time
 
