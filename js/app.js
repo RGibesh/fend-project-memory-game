@@ -111,6 +111,7 @@ function gameOver() {
  */
 const movesContainer = document.querySelector(".moves");
 let moves = 0;
+movesContainer.innerHTML = 0;
 
 function addMove() {
     moves++;
@@ -133,6 +134,11 @@ reset.addEventListener("click", function() {
 
     // Reset matched cards
     matchedCards = [];
+
+    // Reset the moves
+    moves = 0;
+    movesContainer.innerHTML = moves;
+
 
 });
 
