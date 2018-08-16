@@ -10,6 +10,9 @@ const cards = document.querySelector(".deck");
 //Empty array to store openedcards
 let openedCards = [];
 
+//Empty array to store matchedCards
+let matchedCards = [];
+
 // Create the Cards dynamically
 for (let i = 0; i < icons.length; i++) {
     const card = document.createElement("div");
@@ -30,11 +33,18 @@ for (let i = 0; i < icons.length; i++) {
             openedCards.push(this);
 
             if (this.innerHTML === openedCards[0].innerHTML) {
+
+                //Matched Cards
                 latestCard.classList.add("match");
                 lastCard.classList.add("match");
 
+                matchedCards.push(latestCard, lastCard);
+
                 //Reset openCards array
                 openedCards = [];
+
+                //Game over function
+                gameOver();
             } else {
                 latestCard.classList.remove("open", "show");
                 lastCard.classList.remove("open", "show");
@@ -49,13 +59,17 @@ for (let i = 0; i < icons.length; i++) {
 
         }
 
-
-
-
-
     });
 }
 
+function gameOver() {
+
+    if (matchedCards.length === icons.length) {
+        alert("GAME OVER");
+    }
+
+
+}
 
 /*
  * Display the cards on the page
