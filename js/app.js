@@ -89,6 +89,9 @@ function compare(latestCard, lastCard) {
             openedCards = [];
         }, 500);
     }
+
+    // Add new move
+    addMove();
 }
 
 /*
@@ -100,6 +103,18 @@ function gameOver() {
     if (matchedCards.length === icons.length) {
         alert("GAME OVER");
     }
+
+}
+
+/*
+ * Create Moves
+ */
+const movesContainer = document.querySelector(".moves");
+let moves = 0;
+
+function addMove() {
+    moves++;
+    movesContainer.innerHTML = moves;
 
 }
 
