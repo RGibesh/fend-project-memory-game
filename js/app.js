@@ -20,16 +20,37 @@ for (let i = 0; i < icons.length; i++) {
     // Add click event on card
     card.addEventListener("click", function() {
 
+        const latestCard = this;
+        const lastCard = openedCards[0];
+
         // Comparing existing opened cards
         if (openedCards.length === 1) {
 
+            card.classList.add("open", "show");
+            openedCards.push(this);
+
+            if (this.innerHTML === openedCards[0].innerHTML) {
+                latestCard.classList.add("match");
+                lastCard.classList.add("match");
+
+                //Reset openCards array
+                openedCards = [];
+            } else {
+                latestCard.classList.remove("open", "show");
+                lastCard.classList.remove("open", "show");
+
+                //Reset openCards array
+                openedCards = [];
+            }
+
         } else {
+            latestCard.classList.add("open", "show");
+            openedCards.push(this);
 
         }
 
 
-        card.classList.add("open", "show");
-        openedCards.push(this);
+
 
 
     });
