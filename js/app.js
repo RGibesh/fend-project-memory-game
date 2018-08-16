@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-const icons = ["fa fa-bolt", "fa fa-bolt", "fa fa-rocket", "fa fa-rocket", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
+const iconsList = ["fa fa-bolt", "fa fa-bolt", "fa fa-rocket", "fa fa-rocket", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
 
 // Select Cards from class deck
 const cards = document.querySelector(".deck");
@@ -18,6 +18,9 @@ let matchedCards = [];
  */
 
 function startGame() {
+    // Shuffle the current `iconsList`
+    const icons = shuffle(iconsList);
+
     // Create the Cards dynamically
     for (let i = 0; i < icons.length; i++) {
         const card = document.createElement("div");
@@ -86,8 +89,10 @@ function compare(latestCard, lastCard) {
             latestCard.classList.remove("open", "show", "disable");
             lastCard.classList.remove("open", "show", "disable");
             //Reset openCards array
-            openedCards = [];
+
         }, 500);
+
+        openedCards = [];
     }
 
     // Add new move
@@ -100,7 +105,7 @@ function compare(latestCard, lastCard) {
 
 function gameOver() {
 
-    if (matchedCards.length === icons.length) {
+    if (matchedCards.length === iconsList.length) {
         alert("GAME OVER");
     }
 
@@ -116,6 +121,15 @@ movesContainer.innerHTML = 0;
 function addMove() {
     moves++;
     movesContainer.innerHTML = moves;
+
+}
+
+/*
+ * Rating function
+ */
+const stars = document.querySelector(".stars");
+
+function rating() {
 
 }
 
