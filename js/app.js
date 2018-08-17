@@ -13,6 +13,31 @@ let openedCards = [];
 //Empty array to store matchedCards
 let matchedCards = [];
 
+let firstClick = true,
+    hours, minutes, seconds,
+    totalTime = 0,
+    incrementer;
+
+const secondsContainer = document.querySelector("#seconds"),
+    minutesContainer = document.querySelector("#minutes"),
+    hoursContainer = document.querySelector("#hours");
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
 /*
  * Initialize the game
  */
@@ -23,7 +48,7 @@ function startGame() {
 
     // Create the Cards dynamically
     for (let i = 0; i < icons.length; i++) {
-        const card = document.createElement("div");
+        const card = document.createElement("li");
         card.classList.add("card");
         card.innerHTML = `<i class="${icons[i]}"></i>`;
         cards.appendChild(card);
@@ -47,6 +72,12 @@ function click(card) {
 
         const latestCard = this;
         const lastCard = openedCards[0];
+
+        //Start the timer on first click
+        if (firstClick) {
+            startTimer();
+            firstClick = false;
+        }
 
         // Comparing existing opened cards
         if (openedCards.length === 1) {
@@ -90,9 +121,11 @@ function compare(latestCard, lastCard) {
             lastCard.classList.remove("open", "show", "disable");
             //Reset openCards array
 
-        }, 500);
 
+        }, 500);
         openedCards = [];
+
+
     }
 
     // Add new move
@@ -134,6 +167,46 @@ function rating() {
 }
 
 /*
+ * Timer Function
+ */
+function startTimer() {
+
+    // Start Incrementer
+    incrementer = setInterval(function() {
+
+        // Add totalTime by 1
+        totalTime += 1;
+
+        // Convert Total Time to hours:minutes:seconds
+        calculateTime(totalTime);
+
+        // Change the current time values
+        secondsContainer.innerHTML = seconds;
+        minutesContainer.innerHTML = minutes;
+        hoursContainer.innerHTML = hours;
+
+    }, 1000);
+
+}
+
+/*
+ * Calculate Time
+ */
+function calculateTime(totalTime) {
+    hours = Math.floor(totalTime / 60 / 60);
+    minutes = Math.floor((totalTime / 60) % 60);
+    seconds = totalTime % 60;
+}
+
+/*
+ * Stop Timer
+ */
+function stopTimer() {
+    // Stop Timer
+    clearInterval(incrementer);
+}
+
+/*
  * Restart the game
  */
 
@@ -153,10 +226,21 @@ reset.addEventListener("click", function() {
     moves = 0;
     movesContainer.innerHTML = moves;
 
+    //Reset Timer
+    hoursContainer.innerHTML = "00";
+    minutesContainer.innerHTML = "00";
+    secondsContainer.innerHTML = "00";
+    stopTimer();
+    firstClick = true;
+    totalTime = 0;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+
 
 });
 
-// Start the game for the first time
+// Start game for the first time
 
 startGame();
 
@@ -167,21 +251,7 @@ startGame();
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
 
 
 /*
