@@ -13,6 +13,9 @@ let openedCards = [];
 //Empty array to store matchedCards
 let matchedCards = [];
 
+let starRate = "",
+    stepRate = 6;
+
 let firstClick = true,
     hours, minutes, seconds,
     totalTime = 0,
@@ -21,6 +24,16 @@ let firstClick = true,
 const secondsContainer = document.querySelector("#seconds"),
     minutesContainer = document.querySelector("#minutes"),
     hoursContainer = document.querySelector("#hours");
+
+const modal = document.querySelector(".modal"),
+    playAgain = document.querySelector(".play-again"),
+    playAgainModal = document.querySelector(".modal .play-again");
+
+const rateContainer = document.querySelector("#total_rate"),
+    exactMoves = iconsList.length / 2,
+    max = exactMoves + stepRate,
+    min = exactMoves + (2 * stepRate);
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -119,10 +132,10 @@ function compare(latestCard, lastCard) {
         setTimeout(function() {
             latestCard.classList.remove("open", "show", "disable");
             lastCard.classList.remove("open", "show", "disable");
-            //Reset openCards array
-
 
         }, 500);
+
+        //Reset openCards array
         openedCards = [];
 
 
@@ -130,6 +143,8 @@ function compare(latestCard, lastCard) {
 
     // Add new move
     addMove();
+
+    rating();
 }
 
 /*
@@ -139,10 +154,58 @@ function compare(latestCard, lastCard) {
 function gameOver() {
 
     if (matchedCards.length === iconsList.length) {
-        alert("GAME OVER");
+        gameOverModel();
     }
 
 }
+
+/*
+ * Game Over Model
+ */
+function gameOverModel() {
+
+    // Display the modal
+    modal.style.top = "0";
+
+    // Add moves to the Modal
+    const totalMoves = document.querySelector("#total_moves");
+    totalMoves.innerHTML = moves + 1;
+
+    // Add Rate
+    rateContainer.innerHTML = starRate;
+
+    // Stop Timer
+    stopTimer();
+
+    // Add time to the Modal
+    const totalHours = document.querySelector("#totalHours");
+    const totalMinutes = document.querySelector("#totalMinutes");
+    const totalSeconds = document.querySelector("#totalSeconds");
+    totalHours.innerHTML = hours;
+    totalMinutes.innerHTML = minutes;
+    totalSeconds.innerHTML = seconds;
+
+}
+
+/*
+ * Play Again
+ */
+playAgain.addEventListener("click", function() {
+
+    // Start the game again
+    repeat();
+
+});
+playAgainModal.addEventListener("click", function() {
+
+    // Hide the modal
+    modal.style.top = "-150%";
+
+    // Start the game again
+    repeat();
+
+});
+
 
 /*
  * Create Moves
@@ -160,9 +223,19 @@ function addMove() {
 /*
  * Rating function
  */
-const stars = document.querySelector(".stars");
+const stars = document.querySelectorAll(".stars");
 
 function rating() {
+
+    if (moves < max) {
+        starRate = "<i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i>";
+    } else if (moves < min) {
+        stars[2].style.color = "#444";
+        starRate = "<i class='fa fa-star'></i><i class='fa fa-star'></i>";
+    } else {
+        stars[1].style.color = "#444";
+        starRate = "<i class='fa fa-star'></i>";
+    }
 
 }
 
@@ -237,8 +310,45 @@ reset.addEventListener("click", function() {
     minutes = 0;
     seconds = 0;
 
+    stars[1].style.color = "#ffb400";
+    stars[2].style.color = "#ffb400";
+    starRate = "";
 
 });
+
+
+function repeat() {
+
+    // Remove all cards
+    cards.innerHTML = "";
+
+    // Call 'startGame' function to start a new game
+    startGame();
+
+    // Reset matched cards
+    matchedCards = [];
+
+    // Reset the moves
+    moves = 0;
+    movesContainer.innerHTML = moves;
+
+
+    //Reset Timer
+    hoursContainer.innerHTML = "00";
+    minutesContainer.innerHTML = "00";
+    secondsContainer.innerHTML = "00";
+    stopTimer();
+    firstClick = true;
+    totalTime = 0;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+
+    stars[1].style.color = "#ffb400";
+    stars[2].style.color = "#ffb400";
+    starRate = "";
+
+}
 
 // Start game for the first time
 
