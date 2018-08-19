@@ -232,10 +232,10 @@ function rating() {
     if (moves < max) {
         starRate = "<i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i>";
     } else if (moves < min) {
-        stars[2].style.color = "#ffb400";
+        stars[0].children[2].style.color = "#ffb400";
         starRate = "<i class='fa fa-star'></i><i class='fa fa-star'></i>";
     } else {
-        stars[1].style.color = "#ffb400";
+        stars[0].children[1].style.color = "#ffb400";
         starRate = "<i class='fa fa-star'></i>";
     }
 
