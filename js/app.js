@@ -2,7 +2,9 @@
  * Create a list that holds all of your cards
  */
 
-const iconsList = ["fa fa-bolt", "fa fa-bolt", "fa fa-rocket", "fa fa-rocket", "fa fa-car", "fa fa-car", "fa fa-heart", "fa fa-heart", "fa fa-motorcycle", "fa fa-motorcycle", "fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-leaf", "fa fa-leaf"];
+const symbols = ["fa fa-bolt", "fa fa-rocket", "fa fa-car", "fa fa-heart", "fa fa-motorcycle", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-leaf"];
+
+const iconsList = [...symbols, ...symbols];
 
 // Select Cards from class deck
 const cards = document.querySelector(".deck");
