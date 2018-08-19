@@ -22,6 +22,11 @@ The game ends once all cards have been correctly matched.
 - Rating stars.
 - Restart/Play again functionality.
 
+## Code Dependecies
+
+- Font-awesome.
+- Google font.
+
 You can play the game here [Play](https://danielotieno.github.io/fend-project-memory-game/ "Memory Game")
 
 ## Screenshot
